@@ -10,7 +10,7 @@ function App() {
   if (config.singnInEnabled && name === "") {
     return <SignIn setName={setName} />
   } else {
-    return <Main />
+    return <Main　name={name} />
   }
 }
 

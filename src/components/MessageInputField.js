@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Avatar, Grid} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
 import { gravatorPath } from "../gravator";
 import MessageField from "./MessageField"
+import MessageSubmitButton from "./MessageSubmitButton";
 
 const useStyles = makeStyles({
     root: {
@@ -13,19 +14,32 @@ const useStyles = makeStyles({
 })
 
 export default function MessageInputField(props) {
+    const inputEl = useRef(null)
     const [text, setText] = useState("")
     const classes = useStyles()
-    const avatorPath = gravatorPath("hahaha")
+    const avatorPath = gravatorPath(props.name)
     return (
         <div className={classes.root}>
             <Grid container>
-                <Grid xs={1}>
+                <Grid　item xs={1}>
                     <Avatar src={avatorPath} />
                 </Grid>
-                <Grid xs={10}>
-                    <MessageField name={props.name} text={text} setText={setText} />
+                <Grid　item xs={10}>
+                    <MessageField
+                        inputEl={inputEl}
+                        name={props.name}
+                        text={text}
+                        setText={setText}
+                    />
                 </Grid>
-                <Grid xs={1}>ボタン</Grid>
+                <Grid item xs={1}>
+                    <MessageSubmitButton
+                        inputEl={inputEl}
+                        name={props.name}
+                        text={text}
+                        setText={setText}
+                    />
+                </Grid>
             </Grid>
         </div>
     )
